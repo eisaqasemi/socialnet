@@ -8,7 +8,14 @@
 
 `npm install`
 
-#### create mysql user with name 'admin' and password 'net'
+#### Database Information:
+```
+host : localhost
+port : 3306
+database name : socialnet
+user name : admin
+user password : net
+```
 
 `node migrate.js`
 
