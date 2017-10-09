@@ -1,0 +1,6 @@
+<h3>Add A Photo</h3>
+<tag-input [(ngModel)]="tags"></tag-input>
+<!-- <input type="file" style="margin:40px 0"> -->
+<fileupload [url]="'http://localhost:3000/api/uploads/photos/upload'"
+(UploadFilesChanges)="fileUrls=$event" ></fileupload>
+<button mat-raised-button color="primary" *ngIf="fileUrls.length" (click)="submit()">Submit</button>

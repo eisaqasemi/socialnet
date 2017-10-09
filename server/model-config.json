@@ -48,5 +48,9 @@
   "album": {
     "dataSource": "mysql",
     "public": true
+  },
+  "upload": {
+    "dataSource": "storage",
+    "public": true
   }
 }

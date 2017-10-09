@@ -8,7 +8,8 @@
   "scripts": {
     "lint": "eslint .",
     "start": "node .",
-    "posttest": "npm run lint && nsp check"
+    "posttest": "npm run lint && nsp check",
+    "build:sdk": "./node_modules/.bin/lb-sdk server/server web/src/app/common/sdk -d ng2web -i enabled"
   },
   "dependencies": {
     "compression": "^1.0.3",
@@ -17,6 +18,7 @@
     "loopback": "^3.0.0",
     "loopback-boot": "^2.6.5",
     "loopback-component-explorer": "^4.0.0",
+    "loopback-component-storage": "^3.2.0",
     "loopback-connector-mysql": "^2.4.1",
     "loopback-ds-timestamp-mixin": "^3.4.1",
     "serve-favicon": "^2.0.1",

@@ -12,7 +12,7 @@
     }
   },
   "properties": {
-    "name": {
+    "url": {
       "type": "string"
     },
     "title": {
