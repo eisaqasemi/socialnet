@@ -52,6 +52,7 @@ import { UserApi } from './services/custom/User';
 import { PhotoApi } from './services/custom/Photo';
 import { TagApi } from './services/custom/Tag';
 import { AlbumApi } from './services/custom/Album';
+import { UploadApi } from './services/custom/Upload';
 /**
 * @module SDKBrowserModule
 * @description
@@ -87,6 +88,7 @@ export class SDKBrowserModule {
         PhotoApi,
         TagApi,
         AlbumApi,
+        UploadApi,
         internalStorageProvider,
         { provide: SDKStorage, useClass: StorageBrowser },
         { provide: SocketDriver, useClass: SocketBrowser }

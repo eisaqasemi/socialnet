@@ -335,6 +335,46 @@ export class PhotoApi extends BaseLoopBackApi {
   }
 
   /**
+   * <em>
+         * (The remote method definition does not provide any description.)
+         * </em>
+   *
+   * @param {string} title 
+   *
+   * @param {string} url 
+   *
+   * @param {any} tags 
+   *
+   * @param {string} album 
+   *
+   * @param {object} data Request data.
+   *
+   * This method does not accept any data. Supply an empty object.
+   *
+   * @returns {object} An empty reference that will be
+   *   populated with the actual data once the response is returned
+   *   from the server.
+   *
+   * Data properties:
+   *
+   *  - `` – `{}` - 
+   */
+  public addPhoto(title: any = {}, url: any = {}, tags: any = {}, album: any = {}, customHeaders?: Function): Observable<any> {
+    let _method: string = "POST";
+    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    "/photos/addPhotoWithTags";
+    let _routeParams: any = {};
+    let _postBody: any = {};
+    let _urlParams: any = {};
+    if (typeof title !== 'undefined' && title !== null) _urlParams.title = title;
+    if (typeof url !== 'undefined' && url !== null) _urlParams.url = url;
+    if (typeof tags !== 'undefined' && tags !== null) _urlParams.tags = tags;
+    if (typeof album !== 'undefined' && album !== null) _urlParams.album = album;
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
+    return result;
+  }
+
+  /**
    * Creates a new instance in tags of this model.
    *
    * @param {any} id photo id

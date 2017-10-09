@@ -1,6 +1,25 @@
-<h3>Add A Photo</h3>
-<tag-input [(ngModel)]="tags"></tag-input>
-<!-- <input type="file" style="margin:40px 0"> -->
-<fileupload [url]="'http://localhost:3000/api/uploads/photos/upload'"
-(UploadFilesChanges)="fileUrls=$event" ></fileupload>
-<button mat-raised-button color="primary" *ngIf="fileUrls.length" (click)="submit()">Submit</button>
+<form class="example-form" *ngIf="form" [formGroup]="form">
+        <h3 style="margin-top:0">Add Photo</h3>
+        <div style="padding-bottom:20px;">
+            <tag-input item-content formControlName="tags" [modelAsStrings]="true">
+                <tag-input-dropdown  [autocompleteItems]="suggestedTags">
+                </tag-input-dropdown>
+            </tag-input>
+        </div>
+        <mat-form-field >
+          <input matInput placeholder="title" formControlName="title" >
+        </mat-form-field>
+        <mat-form-field>
+            <mat-select placeholder="Album" formControlName="album" >
+                <mat-option *ngFor="let album of albums" [value]="album.id">{{album.name}}</mat-option>                  
+            </mat-select>
+        </mat-form-field>
+        <div class="example-full-width">
+        <fileupload [url]="'http://localhost:3000/api/uploads/photos/upload'" (UploadFilesChanges)="form.patchValue({url:$event[0]})" ></fileupload>
+        </div>
+         <div>
+            <button mat-raised-button color="primary" [disabled]="!form.valid" (click)="submit(form.value)">Submit</button>
+         </div>     
+</form>
+
+

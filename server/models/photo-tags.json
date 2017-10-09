@@ -1,5 +1,5 @@
 {
-  "name": "photo",
+  "name": "photoTag",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
@@ -11,26 +11,18 @@
       "silenceWarnings": true
     }
   },
-  "properties": {
-    "url": {
-      "type": "string"
-    },
-    "title": {
-      "type": "string"
-    }
-  },
+  "properties": {},
   "validations": [],
   "relations": {
-    "album": {
+    "photo": {
       "type": "belongsTo",
-      "model": "album",
+      "model": "photo",
       "foreignKey": ""
     },
-    "tags": {
-      "type": "hasMany",
+    "tag": {
+      "type": "belongsTo",
       "model": "tag",
-      "foreignKey": "",
-      "through": "photoTag"
+      "foreignKey": ""
     }
   },
   "acls": [],

@@ -52,5 +52,9 @@
   "upload": {
     "dataSource": "storage",
     "public": true
+  },
+  "photoTag": {
+    "dataSource": "mysql",
+    "public": true
   }
 }

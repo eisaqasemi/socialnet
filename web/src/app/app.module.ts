@@ -3,19 +3,23 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { SDKBrowserModule } from "./common/sdk/index";
 import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import { MatTabsModule, MatButtonModule, MatDialogModule } from '@angular/material';
+import { MatTabsModule,
+   MatButtonModule, MatDialogModule,MatInputModule,MatSelectModule,
+  MatCardModule } from '@angular/material';
 import { AddPhotoComponent } from './addPhoto/addPhoto.component';
 import { TagInputModule,TagInputComponent } from 'ngx-chips';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FileUpload } from './fileupload/fileupload';
 import { NgFileSelectDirective } from 'ngx-uploader';
+import { PhotosComponent } from './Photos/Photos.component';
 @NgModule({
   declarations: [
     AppComponent,
     AddPhotoComponent,
     FileUpload,
-    NgFileSelectDirective
-  ],
+    NgFileSelectDirective,
+    PhotosComponent
+],
   imports: [
     BrowserModule,
     SDKBrowserModule.forRoot(),
@@ -24,7 +28,11 @@ import { NgFileSelectDirective } from 'ngx-uploader';
     MatButtonModule,
     MatDialogModule,
     TagInputModule,
-    FormsModule
+    FormsModule,
+    MatInputModule,
+    MatSelectModule,
+    ReactiveFormsModule,
+    MatCardModule
   ],
   providers: [],
   bootstrap: [AppComponent],

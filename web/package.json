@@ -26,6 +26,7 @@
     "core-js": "^2.4.1",
     "ngx-chips": "^1.5.3",
     "ngx-uploader": "3.2.3",
+    "node-sass": "^4.5.3",
     "rxjs": "^5.4.2",
     "zone.js": "^0.8.14"
   },

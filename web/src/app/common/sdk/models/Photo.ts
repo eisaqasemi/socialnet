@@ -6,7 +6,7 @@ import {
 
 declare var Object: any;
 export interface PhotoInterface {
-  "name"?: string;
+  "url"?: string;
   "title"?: string;
   "id"?: number;
   "createdAt": Date;
@@ -17,7 +17,7 @@ export interface PhotoInterface {
 }
 
 export class Photo implements PhotoInterface {
-  "name": string;
+  "url": string;
   "title": string;
   "id": number;
   "createdAt": Date;
@@ -56,8 +56,8 @@ export class Photo implements PhotoInterface {
       name: 'Photo',
       plural: 'Photos',
       properties: {
-        "name": {
-          name: 'name',
+        "url": {
+          name: 'url',
           type: 'string'
         },
         "title": {

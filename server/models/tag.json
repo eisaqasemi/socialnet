@@ -19,10 +19,11 @@
   },
   "validations": [],
   "relations": {
-    "photo": {
-      "type": "belongsTo",
+    "photos": {
+      "type": "hasMany",
       "model": "photo",
-      "foreignKey": ""
+      "foreignKey": "",
+      "through": "photoTag"
     }
   },
   "acls": [],

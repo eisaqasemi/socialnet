@@ -11,7 +11,8 @@ var tables =
 "Role",
 "photo",
 "tag",
-"album"
+"album",
+"photoTag"
 ]
 
 async.eachSeries(tables, 
