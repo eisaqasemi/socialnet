@@ -2,7 +2,7 @@ import { Component, Inject,OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { PhotoApi } from '../common/sdk/services/custom/Photo';
 import { TagApi } from '../common/sdk/services/custom/Tag';
-import { AlbumApi } from '../common/sdk/services/custom/Album'
+import { AlbumApi } from '../common/sdk/services/custom/Album';
 import { FormBuilder,FormGroup } from '@angular/forms';
 import { Validators } from '@angular/forms'
 @Component({
@@ -41,7 +41,7 @@ import { Validators } from '@angular/forms'
     }
 
     submit(form){
-      this.photoApi.addPhoto(form.title,form.url,form.tags,form.album).
+      this.photoApi.addPhoto(form).
       subscribe(value=>{
         this.dialogRef.close();
       })    

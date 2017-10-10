@@ -5,6 +5,7 @@ import { Photo } from '../../models/Photo';
 import { Tag } from '../../models/Tag';
 import { Album } from '../../models/Album';
 import { Upload } from '../../models/Upload';
+import { PhotoTag } from '../../models/PhotoTag';
 
 export interface Models { [name: string]: any }
 
@@ -17,6 +18,7 @@ export class SDKModels {
     Tag: Tag,
     Album: Album,
     Upload: Upload,
+    PhotoTag: PhotoTag,
     
   };
 

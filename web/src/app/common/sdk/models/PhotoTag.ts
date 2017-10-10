@@ -1,48 +1,46 @@
 /* tslint:disable */
 import {
-  Album,
+  Photo,
   Tag
 } from '../index';
 
 declare var Object: any;
-export interface PhotoInterface {
-  "url"?: string;
-  "title"?: string;
+export interface PhotoTagInterface {
   "id"?: number;
+  "photoId"?: number;
+  "tagId"?: number;
   "createdAt": Date;
   "updatedAt": Date;
-  "albumId"?: number;
-  album?: Album;
-  tags?: Tag[];
+  photo?: Photo;
+  tag?: Tag;
 }
 
-export class Photo implements PhotoInterface {
-  "url": string;
-  "title": string;
+export class PhotoTag implements PhotoTagInterface {
   "id": number;
+  "photoId": number;
+  "tagId": number;
   "createdAt": Date;
   "updatedAt": Date;
-  "albumId": number;
-  album: Album;
-  tags: Tag[];
-  constructor(data?: PhotoInterface) {
+  photo: Photo;
+  tag: Tag;
+  constructor(data?: PhotoTagInterface) {
     Object.assign(this, data);
   }
   /**
    * The name of the model represented by this $resource,
-   * i.e. `Photo`.
+   * i.e. `PhotoTag`.
    */
   public static getModelName() {
-    return "Photo";
+    return "PhotoTag";
   }
   /**
   * @method factory
   * @author Jonathan Casarrubias
   * @license MIT
-  * This method creates an instance of Photo for dynamic purposes.
+  * This method creates an instance of PhotoTag for dynamic purposes.
   **/
-  public static factory(data: PhotoInterface): Photo{
-    return new Photo(data);
+  public static factory(data: PhotoTagInterface): PhotoTag{
+    return new PhotoTag(data);
   }
   /**
   * @method getModelDefinition
@@ -53,19 +51,19 @@ export class Photo implements PhotoInterface {
   **/
   public static getModelDefinition() {
     return {
-      name: 'Photo',
-      plural: 'Photos',
+      name: 'PhotoTag',
+      plural: 'PhotoTags',
       properties: {
-        "url": {
-          name: 'url',
-          type: 'string'
-        },
-        "title": {
-          name: 'title',
-          type: 'string'
-        },
         "id": {
           name: 'id',
+          type: 'number'
+        },
+        "photoId": {
+          name: 'photoId',
+          type: 'number'
+        },
+        "tagId": {
+          name: 'tagId',
           type: 'number'
         },
         "createdAt": {
@@ -76,20 +74,16 @@ export class Photo implements PhotoInterface {
           name: 'updatedAt',
           type: 'Date'
         },
-        "albumId": {
-          name: 'albumId',
-          type: 'number'
-        },
       },
       relations: {
-        album: {
-          name: 'album',
-          type: 'Album',
-          model: 'Album'
+        photo: {
+          name: 'photo',
+          type: 'Photo',
+          model: 'Photo'
         },
-        tags: {
-          name: 'tags',
-          type: 'Tag[]',
+        tag: {
+          name: 'tag',
+          type: 'Tag',
           model: 'Tag'
         },
       }

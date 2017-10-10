@@ -7,19 +7,17 @@ declare var Object: any;
 export interface TagInterface {
   "name": string;
   "id"?: number;
-  "photoId"?: number;
   "createdAt": Date;
   "updatedAt": Date;
-  photo?: Photo;
+  photos?: Photo[];
 }
 
 export class Tag implements TagInterface {
   "name": string;
   "id": number;
-  "photoId": number;
   "createdAt": Date;
   "updatedAt": Date;
-  photo: Photo;
+  photos: Photo[];
   constructor(data?: TagInterface) {
     Object.assign(this, data);
   }
@@ -59,10 +57,6 @@ export class Tag implements TagInterface {
           name: 'id',
           type: 'number'
         },
-        "photoId": {
-          name: 'photoId',
-          type: 'number'
-        },
         "createdAt": {
           name: 'createdAt',
           type: 'Date'
@@ -73,9 +67,9 @@ export class Tag implements TagInterface {
         },
       },
       relations: {
-        photo: {
-          name: 'photo',
-          type: 'Photo',
+        photos: {
+          name: 'photos',
+          type: 'Photo[]',
           model: 'Photo'
         },
       }

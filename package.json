@@ -7,7 +7,7 @@
   },
   "scripts": {
     "lint": "eslint .",
-    "start": "node .",
+    "start": "nodemon --watch server --exec node --inspect . ",
     "posttest": "npm run lint && nsp check",
     "build:sdk": "./node_modules/.bin/lb-sdk server/server web/src/app/common/sdk -d ng2web -i enabled"
   },

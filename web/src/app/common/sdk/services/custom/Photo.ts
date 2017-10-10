@@ -12,8 +12,10 @@ import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Rx';
 import { Photo } from '../../models/Photo';
 import { SocketConnection } from '../../sockets/socket.connections';
-import { Tag } from '../../models/Tag';
 import { Album } from '../../models/Album';
+import { Tag } from '../../models/Tag';
+
+
 
 
 /**
@@ -31,6 +33,36 @@ export class PhotoApi extends BaseLoopBackApi {
     @Optional() @Inject(ErrorHandler) protected errorHandler: ErrorHandler
   ) {
     super(http,  connection,  models, auth, searchParams, errorHandler);
+  }
+
+  /**
+   * Fetches belongsTo relation album.
+   *
+   * @param {any} id photo id
+   *
+   * @param {boolean} refresh 
+   *
+   * @returns {object} An empty reference that will be
+   *   populated with the actual data once the response is returned
+   *   from the server.
+   *
+   * <em>
+   * (The remote method definition does not provide any description.
+   * This usually means the response is a `Photo` object.)
+   * </em>
+   */
+  public getAlbum(id: any, refresh: any = {}, customHeaders?: Function): Observable<any> {
+    let _method: string = "GET";
+    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    "/photos/:id/album";
+    let _routeParams: any = {
+      id: id
+    };
+    let _postBody: any = {};
+    let _urlParams: any = {};
+    if (typeof refresh !== 'undefined' && refresh !== null) _urlParams.refresh = refresh;
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
+    return result;
   }
 
   /**
@@ -127,11 +159,15 @@ export class PhotoApi extends BaseLoopBackApi {
   }
 
   /**
-   * Fetches belongsTo relation album.
+   * Add a related item by id for tags.
    *
    * @param {any} id photo id
    *
-   * @param {boolean} refresh 
+   * @param {any} fk Foreign key for tags
+   *
+   * @param {object} data Request data.
+   *
+   * This method expects a subset of model properties as request parameters.
    *
    * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
@@ -142,16 +178,75 @@ export class PhotoApi extends BaseLoopBackApi {
    * This usually means the response is a `Photo` object.)
    * </em>
    */
-  public getAlbum(id: any, refresh: any = {}, customHeaders?: Function): Observable<any> {
-    let _method: string = "GET";
+  public linkTags(id: any, fk: any, data: any = {}, customHeaders?: Function): Observable<any> {
+    let _method: string = "PUT";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/photos/:id/album";
+    "/photos/:id/tags/rel/:fk";
     let _routeParams: any = {
-      id: id
+      id: id,
+      fk: fk
+    };
+    let _postBody: any = {
+      data: data
+    };
+    let _urlParams: any = {};
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
+    return result;
+  }
+
+  /**
+   * Remove the tags relation to an item by id.
+   *
+   * @param {any} id photo id
+   *
+   * @param {any} fk Foreign key for tags
+   *
+   * @returns {object} An empty reference that will be
+   *   populated with the actual data once the response is returned
+   *   from the server.
+   *
+   * This method returns no data.
+   */
+  public unlinkTags(id: any, fk: any, customHeaders?: Function): Observable<any> {
+    let _method: string = "DELETE";
+    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    "/photos/:id/tags/rel/:fk";
+    let _routeParams: any = {
+      id: id,
+      fk: fk
     };
     let _postBody: any = {};
     let _urlParams: any = {};
-    if (typeof refresh !== 'undefined' && refresh !== null) _urlParams.refresh = refresh;
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
+    return result;
+  }
+
+  /**
+   * Check the existence of tags relation to an item by id.
+   *
+   * @param {any} id photo id
+   *
+   * @param {any} fk Foreign key for tags
+   *
+   * @returns {object} An empty reference that will be
+   *   populated with the actual data once the response is returned
+   *   from the server.
+   *
+   * <em>
+   * (The remote method definition does not provide any description.
+   * This usually means the response is a `Photo` object.)
+   * </em>
+   */
+  public existsTags(id: any, fk: any, customHeaders?: Function): Observable<any> {
+    let _method: string = "HEAD";
+    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    "/photos/:id/tags/rel/:fk";
+    let _routeParams: any = {
+      id: id,
+      fk: fk
+    };
+    let _postBody: any = {};
+    let _urlParams: any = {};
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
   }
@@ -339,37 +434,61 @@ export class PhotoApi extends BaseLoopBackApi {
          * (The remote method definition does not provide any description.)
          * </em>
    *
-   * @param {string} title 
-   *
-   * @param {string} url 
-   *
-   * @param {any} tags 
-   *
-   * @param {string} album 
-   *
    * @param {object} data Request data.
    *
-   * This method does not accept any data. Supply an empty object.
+   * This method expects a subset of model properties as request parameters.
    *
    * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
-   * Data properties:
-   *
-   *  - `` – `{}` - 
+   * <em>
+   * (The remote method definition does not provide any description.
+   * This usually means the response is a `Photo` object.)
+   * </em>
    */
-  public addPhoto(title: any = {}, url: any = {}, tags: any = {}, album: any = {}, customHeaders?: Function): Observable<any> {
+  public addPhoto(data: any = {}, customHeaders?: Function): Observable<any> {
     let _method: string = "POST";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/photos/addPhotoWithTags";
+    "/photos";
+    let _routeParams: any = {};
+    let _postBody: any = {
+      data: data
+    };
+    let _urlParams: any = {};
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
+    return result;
+  }
+
+  /**
+   * <em>
+         * (The remote method definition does not provide any description.)
+         * </em>
+   *
+   * @param {string} sort 
+   *
+   * @param {string} order 
+   *
+   * @param {object} options 
+   *
+   * @returns {object} An empty reference that will be
+   *   populated with the actual data once the response is returned
+   *   from the server.
+   *
+   * <em>
+   * (The remote method definition does not provide any description.
+   * This usually means the response is a `Photo` object.)
+   * </em>
+   */
+  public getPhotos(sort: any = {}, order: any = {}, customHeaders?: Function): Observable<any> {
+    let _method: string = "GET";
+    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    "/photos";
     let _routeParams: any = {};
     let _postBody: any = {};
     let _urlParams: any = {};
-    if (typeof title !== 'undefined' && title !== null) _urlParams.title = title;
-    if (typeof url !== 'undefined' && url !== null) _urlParams.url = url;
-    if (typeof tags !== 'undefined' && tags !== null) _urlParams.tags = tags;
-    if (typeof album !== 'undefined' && album !== null) _urlParams.album = album;
+    if (typeof sort !== 'undefined' && sort !== null) _urlParams.sort = sort;
+    if (typeof order !== 'undefined' && order !== null) _urlParams.order = order;
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
   }
