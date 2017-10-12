@@ -30,20 +30,7 @@
 </div>
 <div *ngIf="sort != 'tags'">
     <div *ngIf="photos">
-        <mat-card class="photo-card" *ngFor="let photo of photos">
-          <mat-card-header>
-            <div mat-card-avatar class="example-header-image"></div>
-            <mat-card-title>Shiba Inu</mat-card-title>
-            <mat-card-subtitle>{{photo.album.name}} Album</mat-card-subtitle>
-          </mat-card-header>
-          <mat-card-title>{{photo.title}}</mat-card-title>
-          <img mat-card-image [src]="photo.url" alt="Photo of a Shiba Inu">
-          <mat-card-content>
-            <p>
-              <span *ngFor="let tag of photo.tags"><b>#{{tag.name}} </b></span>
-            </p>
-          </mat-card-content>
-        </mat-card>
+        <app-photo *ngFor="let photo of photos" [photo]="photo" ></app-photo>
     </div>
 </div>
 
@@ -53,20 +40,7 @@
         <mat-chip-list style="padding-left:50px; padding-top:20px;">
             <mat-chip>{{tag.name}}</mat-chip>
         </mat-chip-list>
-        <mat-card class="photo-card" *ngFor="let photo of tag.photos">
-            <mat-card-header>
-              <div mat-card-avatar class="example-header-image"></div>
-              <mat-card-title>Shiba Inu</mat-card-title>
-              <mat-card-subtitle>{{photo.album.name}} Album</mat-card-subtitle>
-            </mat-card-header>
-            <mat-card-title>{{photo.title}}</mat-card-title>
-            <img mat-card-image [src]="photo.url" alt="Photo of a Shiba Inu">
-            <mat-card-content>
-              <p>
-                <span *ngFor="let tag of photo.tags"><b>#{{tag.name}} </b></span>
-              </p>
-            </mat-card-content>
-        </mat-card>
+        <app-photo *ngFor="let photo of tag.photos" [photo]="photo"></app-photo>
         <hr>
     </div>
   </div>

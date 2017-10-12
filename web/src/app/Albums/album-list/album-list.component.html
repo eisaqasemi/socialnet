@@ -28,7 +28,7 @@
     </div>      
 </div>
 
-<a [routerLink]="'/albums/'+album.name" *ngFor="let album of albums" >
+<a [routerLink]="'/albums/'+album.id" *ngFor="let album of albums" >
   <mat-card class="album">
       <mat-card-title>{{album.name}}</mat-card-title>
   </mat-card>

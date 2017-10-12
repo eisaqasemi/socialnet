@@ -6,7 +6,8 @@ import { SDKBrowserModule } from "./common/sdk/index";
 import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { MatTabsModule,
    MatButtonModule, MatDialogModule,MatInputModule,MatSelectModule,
-  MatCardModule,MatToolbarModule, MatChipsModule, MatExpansionModule } from '@angular/material';
+  MatCardModule,MatToolbarModule, MatChipsModule, MatExpansionModule,
+  MatIconModule,MatSidenavModule, MatListModule,MatMenuModule } from '@angular/material';
 import { AddPhotoComponent } from './addPhoto/addPhoto.component';
 import { TagInputModule,TagInputComponent } from 'ngx-chips';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -17,13 +18,17 @@ import { AlbumsComponent } from './Albums/Albums.component';
 import { AlbumComponent } from './Albums/album/album.component';
 import { AlbumListComponent } from './Albums/album-list/album-list.component';
 import { CreateAlbumComponent } from './Albums/create-album/create-album.component'
+import { PhotoComponent } from './Photos/photo/photo.component'
+import { LayoutComponent } from './layout/layout/layout.component';
+import { SidebarComponent } from  './layout/sidebar/sidebar.component';
+import { HeaderComponent } from './layout/header/header.component'
 
 const routes: Routes = [
   { path:"albums" , component:AlbumListComponent },
-  { path:"albums/:name" , component:AlbumComponent }
+  { path:"photos" , component:PhotosComponent },
+  { path:"albums/:id" , component:AlbumComponent },
+  { path:"" ,redirectTo:"photos",pathMatch:"full"}
 ]
-
-
 
 @NgModule({
   declarations: [
@@ -35,7 +40,11 @@ const routes: Routes = [
     AlbumsComponent,
     AlbumComponent,
     AlbumListComponent,
-    CreateAlbumComponent
+    CreateAlbumComponent,
+    PhotoComponent,
+    LayoutComponent,
+    SidebarComponent,
+    HeaderComponent
 ],
   imports: [
     BrowserModule,
@@ -53,7 +62,11 @@ const routes: Routes = [
     MatToolbarModule,
     MatChipsModule,
     MatExpansionModule,
-    RouterModule.forRoot(routes)
+    MatIconModule,
+    RouterModule.forRoot(routes),
+    MatSidenavModule,
+    MatListModule,
+    MatMenuModule
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -1,0 +1,14 @@
+<mat-card class="photo-card" >
+    <mat-card-header>
+      <div mat-card-avatar class="example-header-image"></div>
+      <mat-card-title>Shiba Inu</mat-card-title>
+      <mat-card-subtitle>{{photo.album.name}} Album</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-title>{{photo.title}}</mat-card-title>
+    <img mat-card-image [src]="photo.url">
+    <mat-card-content>
+      <p>
+        <span *ngFor="let tag of photo.tags"><b>#{{tag.name}} </b></span>
+      </p>
+    </mat-card-content>
+</mat-card>

@@ -1,3 +1,56 @@
-<p>
-  album works!
-</p>
+<div style="position:relative;background-color:rgb(245, 245, 245);height:68px;text-align:center">
+    <div style="position:absolute;top:20px;left:30px">
+        <a [routerLink]="'/albums'" class="link-style">
+            <mat-icon>arrow_back</mat-icon> Back to Albums
+        </a>
+        <!-- <button mat-raised-button color="primary" class="add-photo" (click)="openDialog()">Add Photo</button> -->
+    </div>
+
+    <span *ngIf="album" style="display:inline-block;padding-top:23px">{{album.name}}</span>
+
+    <div style="position:absolute;top:0;right:30px">
+        <div style="display:inline-block">
+              <mat-form-field style="width:140px;">
+                <mat-select placeholder="Sort" [ngModel]="sort" (ngModelChange)="sortChange($event)" >
+                  <mat-option *ngFor="let sort of sorts" [value]="sort.value">
+                    {{ sort.label }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+        </div>
+        <div style="display:inline-block" *ngIf="sort">
+              <mat-form-field style="width:130px;padding-left:10px;">
+                <mat-select placeholder="Order" [ngModel]="order" (ngModelChange)="orderChange($event)">
+                  <mat-option  [value]="'ASC'">
+                      Ascending
+                  </mat-option>
+                  <mat-option  [value]="'DESC'">
+                      descending
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+        </div>
+        <div style="display:inline-block">
+                <button mat-icon-button [matMenuTriggerFor]="menu">
+                        <mat-icon>more_vert</mat-icon>
+                      </button>
+                      <mat-menu #menu="matMenu">
+                        <button mat-menu-item>
+                          <mat-icon>photo</mat-icon>
+                          <span>Add Photo</span>
+                        </button>
+                        <button mat-menu-item>
+                          <mat-icon>mode_edit</mat-icon>
+                          <span>Edit Album</span>
+                        </button>
+                        <button mat-menu-item>
+                          <mat-icon>delete</mat-icon>
+                          <span>Remove Album</span>
+                        </button>
+                </mat-menu>
+        </div>      
+    </div>      
+</div>
+<div *ngIf="photos">
+    <app-photo *ngFor="let photo of photos" [photo]="photo"></app-photo>
+</div>
