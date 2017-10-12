@@ -8,8 +8,8 @@
 
     <span *ngIf="album" style="display:inline-block;padding-top:23px">{{album.name}}</span>
 
-    <div style="position:absolute;top:0;right:30px">
-        <div style="display:inline-block">
+    <div style="position:absolute;top:10px;right:30px">
+        <!-- <div style="display:inline-block">
               <mat-form-field style="width:140px;">
                 <mat-select placeholder="Sort" [ngModel]="sort" (ngModelChange)="sortChange($event)" >
                   <mat-option *ngFor="let sort of sorts" [value]="sort.value">
@@ -29,21 +29,21 @@
                   </mat-option>
                 </mat-select>
               </mat-form-field>
-        </div>
+        </div> -->
         <div style="display:inline-block">
                 <button mat-icon-button [matMenuTriggerFor]="menu">
                         <mat-icon>more_vert</mat-icon>
                       </button>
                       <mat-menu #menu="matMenu">
-                        <button mat-menu-item>
+                        <button mat-menu-item (click)="addPhoto()">
                           <mat-icon>photo</mat-icon>
                           <span>Add Photo</span>
                         </button>
-                        <button mat-menu-item>
+                        <button mat-menu-item (click)="editAlbum()">
                           <mat-icon>mode_edit</mat-icon>
                           <span>Edit Album</span>
                         </button>
-                        <button mat-menu-item>
+                        <button mat-menu-item (click)="removeAlbum()">
                           <mat-icon>delete</mat-icon>
                           <span>Remove Album</span>
                         </button>

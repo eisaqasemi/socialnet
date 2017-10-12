@@ -5,3 +5,8 @@
   .example-spacer {
     flex: 1 1 auto;
   }
+
+  .example-header-image {
+    background-image: url('/assets/img/profile.jpg');
+    background-size: cover;
+    }

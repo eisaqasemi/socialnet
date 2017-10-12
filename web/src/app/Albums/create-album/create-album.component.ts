@@ -19,7 +19,7 @@ export class CreateAlbumComponent implements OnInit {
     private albumApi:AlbumApi
   ) { 
     this.form = this.formBuilder.group({
-      name:['',[Validators.required]]
+      name:[this.data.name,[Validators.required]]
     })
   }
 
@@ -31,10 +31,19 @@ export class CreateAlbumComponent implements OnInit {
   }
 
   submit(form){
-    this.albumApi.create(form).
-    subscribe(value=>{
-      this.dialogRef.close();
-    })    
+
+    if(this.data.id){
+      this.albumApi.patchAttributes(this.data.id,form).
+      subscribe(value=>{
+        this.dialogRef.close();
+      }) 
+    }else{
+      this.albumApi.create(form).
+      subscribe(value=>{
+        this.dialogRef.close();
+      }) 
+    }
+       
   }
 
 }
