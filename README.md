@@ -1,15 +1,22 @@
-# My Application
+### SocialNet 
 
-##install node.js, mysql
+#### install node.js, mysql
 
-## git clone https://github.com/eisaqasemi/socialnet.git
+`git clone https://github.com/eisaqasemi/socialnet.git`
 
-## cd socialnet
+`cd socialnet`
 
-## npm install
+`npm install`
 
-## create mysql user with name 'admin' and password 'net'
+#### Database Information:
+```
+host : localhost
+port : 3306
+database name : socialnet
+user name : admin
+user password : net
+```
 
-## node migrate.js
+`node migrate.js`
 
-## npm start
+`npm start`

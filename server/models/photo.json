@@ -29,8 +29,12 @@
     "tags": {
       "type": "hasMany",
       "model": "tag",
+<<<<<<< HEAD
       "foreignKey": "",
       "through": "photoTag"
+=======
+      "foreignKey": ""
+>>>>>>> bbdedec77d7c6e05de5e6162a892a3a76641bea6
     }
   },
   "acls": [],
