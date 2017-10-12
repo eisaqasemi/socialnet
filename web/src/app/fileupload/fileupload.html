@@ -1,4 +1,4 @@
-<div class="rows" style="margin:40px 0;">        
+<div class="rows" style="margin:40px 0;margin-top: 5px;">        
  
         <div class="col-xs-12">
           <div style="overflow:hidden;height:40px;position:relative;display:inline-block">
@@ -9,7 +9,7 @@
         </div>
 
         <div class="col-xs-12">
-          <div *ngFor="let f of files; let i = index;">
+          <div *ngFor="let f of files; let i = index;"  >
             <span *ngIf="f.progress.data.percentage != 100">
                 <span style="display:inline-block;vertical-align:top">{{ f.name }}</span>
                 <div class="progress" style="display:inline-block;width:200px;margin-bottom:0;">
@@ -23,17 +23,12 @@
 
           <div *ngFor="let f of fileUrls; let i = index;" 
           style="
-          padding: 20px;
-          height: 200px;
           position: relative;
           overflow: hidden;
-          display: inline-block;">
+          display: inline-block;"
+          >
               
-          <img [src]="f" alt="" 
-              style="
-              width: 100%;
-              height: auto;
-              border: 1px solid #eee;">
+          <span>{{f.split('/')[f.split('/').length-1]}}</span>
           </div>
         </div>
 

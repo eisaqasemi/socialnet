@@ -30,7 +30,7 @@
 </div>
 <div *ngIf="sort != 'tags'">
     <div *ngIf="photos">
-        <app-photo *ngFor="let photo of photos" [photo]="photo" ></app-photo>
+        <app-photo *ngFor="let photo of photos" [photo]="photo" (refresh)="getPhotos()" ></app-photo>
     </div>
 </div>
 
@@ -40,7 +40,7 @@
         <mat-chip-list style="padding-left:50px; padding-top:20px;">
             <mat-chip>{{tag.name}}</mat-chip>
         </mat-chip-list>
-        <app-photo *ngFor="let photo of tag.photos" [photo]="photo"></app-photo>
+        <app-photo *ngFor="let photo of tag.photos" [photo]="photo"  (refresh)="getPhotos()"></app-photo>
         <hr>
     </div>
   </div>

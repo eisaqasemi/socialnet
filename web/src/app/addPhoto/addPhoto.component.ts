@@ -29,10 +29,10 @@ import { Validators } from '@angular/forms'
       this.suggestedTags = await this.tagApi.find().toPromise().then(tags=>tags.map(tag=>(tag as any).name))
       this.albums = await this.albumApi.find().toPromise();
       this.form = this.formBuilder.group({
-        title:['',[Validators.required]],
-        url:['',[Validators.required]],
-        album:['',[Validators.required]],
-        tags:''
+        title:[this.data.title,[Validators.required]],
+        url:[this.data.url,[Validators.required]],
+        album:[this.data.album,[Validators.required]],
+        tags:[this.data.tags]
       })
     }
 
@@ -41,9 +41,17 @@ import { Validators } from '@angular/forms'
     }
 
     submit(form){
-      this.photoApi.addPhoto(form).
-      subscribe(value=>{
-        this.dialogRef.close();
-      })    
+      if(this.data.id){
+        this.photoApi.editPhoto(this.data.id,form).
+        subscribe(value=>{
+          this.dialogRef.close();
+        }) 
+      }else{
+        this.photoApi.addPhoto(form).
+        subscribe(value=>{
+          this.dialogRef.close();
+        }) 
+      }
+         
     }
   }

@@ -3,6 +3,23 @@
       <div mat-card-avatar class="example-header-image"></div>
       <mat-card-title>Shiba Inu</mat-card-title>
       <mat-card-subtitle>{{photo.album.name}} Album</mat-card-subtitle>
+      <div style="
+      position: absolute;
+      right: 0;">
+        <button mat-icon-button [matMenuTriggerFor]="menu">
+          <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="edit()">
+            <mat-icon>mode_edit</mat-icon>
+            <span>Edit</span>
+          </button>
+          <button mat-menu-item (click)="delete()">
+            <mat-icon>delete</mat-icon>
+            <span>Remove</span>
+          </button>
+        </mat-menu>
+      </div>
     </mat-card-header>
     <mat-card-title>{{photo.title}}</mat-card-title>
     <img mat-card-image [src]="photo.url">

@@ -16,8 +16,6 @@ import { Album } from '../../models/Album';
 import { Tag } from '../../models/Tag';
 
 
-
-
 /**
  * Api services for the `Photo` model.
  */
@@ -452,6 +450,41 @@ export class PhotoApi extends BaseLoopBackApi {
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/photos";
     let _routeParams: any = {};
+    let _postBody: any = {
+      data: data
+    };
+    let _urlParams: any = {};
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
+    return result;
+  }
+
+  /**
+   * <em>
+         * (The remote method definition does not provide any description.)
+         * </em>
+   *
+   * @param {object} data Request data.
+   *
+   *  - `id` – `{number}` - 
+   *
+   *  - `data` – `{object}` - 
+   *
+   * @returns {object} An empty reference that will be
+   *   populated with the actual data once the response is returned
+   *   from the server.
+   *
+   * <em>
+   * (The remote method definition does not provide any description.
+   * This usually means the response is a `Photo` object.)
+   * </em>
+   */
+  public editPhoto(id: any, data: any = {}, customHeaders?: Function): Observable<any> {
+    let _method: string = "PATCH";
+    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    "/photos/:id";
+    let _routeParams: any = {
+      id: id
+    };
     let _postBody: any = {
       data: data
     };

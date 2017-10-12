@@ -5,7 +5,8 @@ import {
   Output,
   ViewChild,
   ElementRef,
-  AfterViewInit
+  AfterViewInit,
+  OnInit
 } from "@angular/core";
 
 import {
@@ -27,13 +28,15 @@ export interface FormData {
   templateUrl: "./fileupload.html",
   styleUrls: ["./fileupload.scss"]
 })
-export class FileUpload implements AfterViewInit {
+export class FileUpload implements OnInit, AfterViewInit {
+  
   formData: FormData;
   files: UploadFile[];
   uploadInput: EventEmitter<UploadInput>;
   humanizeBytes: Function;
   dragOver: boolean;
   @Input() url: "string";
+  @Input() file: "string";
   @ViewChild("input") input;
   @Output() UploadFilesChanges = new EventEmitter<any[]>();
   @Output() sample = new EventEmitter<any>();
@@ -46,14 +49,22 @@ export class FileUpload implements AfterViewInit {
       autoUpload: true,
       verbose: false
     };
-
+    
     this.files = [];
     this.uploadInput = new EventEmitter<UploadInput>();
     this.humanizeBytes = humanizeBytes;
+  
   }
 
   ngAfterViewInit(): void {
     this.mutliple = this.input.nativeElement.hasAttribute("multiple");
+  }
+
+  ngOnInit(): void {
+    if(this.file){
+      this.fileUrls[0]= this.file;
+      this.UploadFilesChanges.emit(this.fileUrls)
+    }
   }
 
   onUploadOutput(output: UploadOutput): void {

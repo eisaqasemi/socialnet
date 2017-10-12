@@ -52,5 +52,5 @@
     </div>      
 </div>
 <div *ngIf="photos">
-    <app-photo *ngFor="let photo of photos" [photo]="photo"></app-photo>
+    <app-photo *ngFor="let photo of photos" [photo]="photo" (refresh)="getPhotos()" ></app-photo>
 </div>
