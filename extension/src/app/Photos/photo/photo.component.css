@@ -1,0 +1,18 @@
+.photo-card {
+    width: 400px;
+  }
+  
+.example-header-image {
+background-image: url('/assets/img/profile.jpg');;
+background-size: cover;
+}
+
+.photo-card{
+margin-bottom: 20px;
+margin-left: auto;
+margin-right: auto;
+}
+
+.photo-card:first-child{
+    margin-top:20px;
+}

@@ -1,0 +1,9 @@
+<form class="example-form" *ngIf="form" [formGroup]="form">
+    <h3 style="margin-top:0">Create Album</h3>
+    <mat-form-field >
+      <input matInput placeholder="name" formControlName="name" >
+    </mat-form-field>
+     <div>
+        <button mat-raised-button color="primary" [disabled]="!form.valid" (click)="submit(form.value)">Submit</button>
+     </div>     
+</form>

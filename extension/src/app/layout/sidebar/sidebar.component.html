@@ -1,0 +1,13 @@
+<nav>
+    <!-- <h3 mat-subheader>Folders</h3> -->
+    <ul>
+        <li *ngFor="let menu of menus">
+            <a [routerLink]="menu.link" class="link-style"[routerLinkActive]="'link-active'" >
+                <mat-icon mat-list-icon>{{menu.icon}}</mat-icon>
+                <span>{{menu.name}}</span>
+            </a>
+        </li>
+    </ul>
+  
+  </nav>
+  

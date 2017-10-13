@@ -1,0 +1,17 @@
+<app-header></app-header>
+<mat-sidenav-container class="example-sidenav-fab-container">
+    <mat-sidenav #sidenav mode="side" opened="true">
+      <!-- <button mat-mini-fab class="example-fab" (click)="sidenav.toggle()">
+        <mat-icon>add</mat-icon>
+      </button> -->
+      <div class="example-scrolling-content">
+        <app-sidebar></app-sidebar>
+      </div>
+    </mat-sidenav>
+    <!-- <button mat-mini-fab class="example-fab" (click)="sidenav.toggle()">
+      <mat-icon>add</mat-icon>
+    </button> -->
+    <div class="example-scrolling-content content">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-container>

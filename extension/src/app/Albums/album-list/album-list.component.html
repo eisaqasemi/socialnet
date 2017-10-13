@@ -1,0 +1,35 @@
+<div style="position:relative;background-color:rgb(245, 245, 245);height:68px;">
+    <div style="position:absolute;top:10px;left:30px">
+      <button mat-raised-button color="primary" class="add-photo" (click)="openDialog()">Create Album</button>
+    </div>
+
+    <div style="position:absolute;top:10;right:30px">
+        <div style="display:inline-block">
+              <mat-form-field style="width:140px;">
+                <mat-select placeholder="Sort" [ngModel]="sort" (ngModelChange)="sortChange($event)" >
+                  <mat-option *ngFor="let sort of sorts" [value]="sort.value">
+                    {{ sort.label }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+        </div>
+        <div style="display:inline-block" *ngIf="sort">
+              <mat-form-field style="width:130px;padding-left:10px;">
+                <mat-select placeholder="Order" [ngModel]="order" (ngModelChange)="orderChange($event)">
+                  <mat-option  [value]="'ASC'">
+                      Ascending
+                  </mat-option>
+                  <mat-option  [value]="'DESC'">
+                      descending
+                    </mat-option>
+                </mat-select>
+              </mat-form-field>
+        </div>
+    </div>      
+</div>
+
+<a [routerLink]="'/albums/'+album.id" *ngFor="let album of albums" >
+  <mat-card class="album">
+      <mat-card-title>{{album.name}}</mat-card-title>
+  </mat-card>
+</a>

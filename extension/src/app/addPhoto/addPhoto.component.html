@@ -1,0 +1,38 @@
+<form class="example-form" *ngIf="form" [formGroup]="form">
+        <h3 style="margin-top:0">Add Photo</h3>
+        <mat-form-field >
+            <input matInput placeholder="title" formControlName="title" >
+        </mat-form-field>
+        <div style="padding-bottom:20px;">
+            <tag-input item-content formControlName="tags" [modelAsStrings]="true">
+                <tag-input-dropdown  [autocompleteItems]="suggestedTags">
+                </tag-input-dropdown>
+            </tag-input>
+        </div>
+        <mat-form-field>
+            <mat-select placeholder="Album" formControlName="album" >
+                <mat-option *ngFor="let album of albums" [value]="album.id">{{album.name}}</mat-option>                  
+            </mat-select>
+        </mat-form-field>
+        <div class="example-full-width">
+        <fileupload [url]="'http://localhost:3000/api/uploads/photos/upload'" [file]="form.value.url" (UploadFilesChanges)="form.patchValue({url:$event[0]})" ></fileupload>
+        </div>
+         <div>
+            <button mat-raised-button color="primary" [disabled]="!form.valid" (click)="submit(form.value)">Submit</button>
+         </div>     
+</form>
+<div *ngIf="finish">
+    <div class="f-modal-alert">
+            <div class="f-modal-icon f-modal-success animate">
+                <span class="f-modal-line f-modal-tip animateSuccessTip"></span>
+                <span class="f-modal-line f-modal-long animateSuccessLong"></span>
+                <div class="f-modal-placeholder"></div>
+                <div class="f-modal-fix"></div>
+            </div>
+            <p style="text-align: center;
+            margin-top: 40px;">Photo Added</p>
+    </div>
+</div>
+
+
+

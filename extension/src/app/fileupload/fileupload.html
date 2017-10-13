@@ -1,0 +1,35 @@
+<div class="rows" style="margin:40px 0;margin-top: 5px;">        
+ 
+        <div class="col-xs-12">
+          <div style="overflow:hidden;height:40px;position:relative;display:inline-block">
+            <button class="btn btn-primary" mat-raised-button color="accent" style="position: relative;top:0px;right:0;">Choose File</button>
+            <input #input style="position: absolute;top:0px;right:0;opacity:0;height:40px;cursor:pointer" type="file" ngFileSelect (uploadOutput)="onUploadOutput($event)" 
+          [uploadInput]="uploadInput" >
+          </div>  
+        </div>
+
+        <div class="col-xs-12">
+          <div *ngFor="let f of files; let i = index;"  >
+            <span *ngIf="f.progress.data.percentage != 100">
+                <span style="display:inline-block;vertical-align:top">{{ f.name }}</span>
+                <div class="progress" style="display:inline-block;width:200px;margin-bottom:0;">
+                  <div class="progress-bar" [style.width]="f.progress.data.percentage + '%'" 
+                  [ngClass]="{ 'progress-color': f.progress.data.percentage === 100 }">
+                    {{f.progress.data.percentage + '%'}}
+                  </div>
+                </div>
+            </span>
+          </div>
+
+          <div *ngFor="let f of fileUrls; let i = index;" 
+          style="
+          position: relative;
+          overflow: hidden;
+          display: inline-block;"
+          >
+              
+          <span>{{f.split('/')[f.split('/').length-1]}}</span>
+          </div>
+        </div>
+
+</div>
