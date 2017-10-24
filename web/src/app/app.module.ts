@@ -7,7 +7,8 @@ import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { MatTabsModule,
    MatButtonModule, MatDialogModule,MatInputModule,MatSelectModule,
   MatCardModule,MatToolbarModule, MatChipsModule, MatExpansionModule,
-  MatIconModule,MatSidenavModule, MatListModule,MatMenuModule } from '@angular/material';
+  MatIconModule,MatSidenavModule, MatListModule,
+  MatMenuModule,MatGridListModule } from '@angular/material';
 import { AddPhotoComponent } from './addPhoto/addPhoto.component';
 import { TagInputModule,TagInputComponent } from 'ngx-chips';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -22,12 +23,32 @@ import { PhotoComponent } from './Photos/photo/photo.component'
 import { LayoutComponent } from './layout/layout/layout.component';
 import { SidebarComponent } from  './layout/sidebar/sidebar.component';
 import { HeaderComponent } from './layout/header/header.component'
-
+import { LoginComponent } from './login/login.component';
+import { SignupComponent } from './signup/signup.component';
+import { Not_foundComponent } from './not_found/not_found.component';
+import { AuthenticationGuardService } from './AuthenticationGuard.service';
+import { TokenService } from './token.service'
+import { FriendsComponent } from './friends/friends.component';
+import { MessagesComponent } from './messages/messages.component';
+import { DirectComponent } from './direct/direct.component';
+import { TagsComponent } from './tags/tags.component';
 const routes: Routes = [
-  { path:"albums" , component:AlbumListComponent },
-  { path:"photos" , component:PhotosComponent },
-  { path:"albums/:id" , component:AlbumComponent },
-  { path:"" ,redirectTo:"photos",pathMatch:"full"}
+  {
+    component:LayoutComponent,
+    path:"",
+    canActivate:[AuthenticationGuardService],
+    children:[
+      { path:"albums" , component:AlbumListComponent },
+      { path:"photos" , component:PhotosComponent },
+      { path:"tags/:id" , component:TagsComponent },
+      { path:"messages" , component:MessagesComponent },
+      { path:"friends", component:FriendsComponent },
+      { path:"albums/:id" , component:AlbumComponent },
+      { path:"" ,redirectTo:"photos",pathMatch:"full"}
+    ]
+  },
+  { path:"login" , component:LoginComponent },
+  { path:"signup" , component:SignupComponent }
 ]
 
 @NgModule({
@@ -44,7 +65,14 @@ const routes: Routes = [
     PhotoComponent,
     LayoutComponent,
     SidebarComponent,
-    HeaderComponent
+    HeaderComponent,
+    LoginComponent,
+    SignupComponent,
+    Not_foundComponent,
+    FriendsComponent,
+    MessagesComponent,
+    DirectComponent,
+    TagsComponent
 ],
   imports: [
     BrowserModule,
@@ -66,10 +94,14 @@ const routes: Routes = [
     RouterModule.forRoot(routes),
     MatSidenavModule,
     MatListModule,
-    MatMenuModule
+    MatMenuModule,
+    MatGridListModule
   ],
-  providers: [],
+  providers: [
+    AuthenticationGuardService,
+    TokenService
+  ],
   bootstrap: [AppComponent],
-  entryComponents:[AddPhotoComponent,TagInputComponent,CreateAlbumComponent]
+  entryComponents:[AddPhotoComponent,TagInputComponent,CreateAlbumComponent,DirectComponent]
 })
 export class AppModule { }

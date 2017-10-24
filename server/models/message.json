@@ -1,0 +1,35 @@
+{
+  "name": "message",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "mixins": {
+    "TimeStamp": {
+      "validateUpsert": true,
+      "silenceWarnings": true
+    }
+  },
+  "properties": {},
+  "validations": [],
+  "relations": {
+    "sender": {
+      "type": "belongsTo",
+      "model": "SocialNetUser",
+      "foreignKey": ""
+    },
+    "reciever": {
+      "type": "belongsTo",
+      "model": "SocialNetUser",
+      "foreignKey": ""
+    },
+    "photo": {
+      "type": "belongsTo",
+      "model": "photo",
+      "foreignKey": ""
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

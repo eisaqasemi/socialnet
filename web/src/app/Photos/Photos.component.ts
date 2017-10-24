@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PhotoApi } from '../common/sdk/services/custom/Photo';
 import { MatDialog } from '@angular/material';
 import { AddPhotoComponent } from '../addPhoto/addPhoto.component';
-
+import { LoopBackAuth } from "../common/sdk/services/core/auth.service"
 @Component({
   selector: 'app-Photos',
   templateUrl: './Photos.component.html',
@@ -13,14 +13,16 @@ export class PhotosComponent implements OnInit {
   sorts = [{label:"Publication Date",value:"createdAt"},{label:"Title",value:"title"},{label:"tags",value:"tags"}]
   sort:string;
   order:string = 'DESC';
-
   constructor(
     private photoApi:PhotoApi,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private auth:LoopBackAuth
   ) { }
 
   async ngOnInit() {
+    
     this.getPhotos();
+
   }
 
   openDialog(): void {

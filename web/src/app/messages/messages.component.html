@@ -1,0 +1,16 @@
+<div *ngFor="let message of messages">
+  <div>
+    <div class="message">
+        <p *ngIf="message.sender.id == userId">
+            Sent To: {{ message.reciever.firstName+" "+message.reciever.lastName}}
+          </p>
+          <p *ngIf="message.reciever.id == userId">
+            Recieved From: {{ message.sender.firstName+" "+message.sender.lastName}}
+          </p>
+          <p>Date:{{message.createdAt | date }}</p>
+    </div>
+     
+      <app-photo [photo]="message.photo"  (refresh)="getPhotos()"></app-photo>
+      <hr>
+  </div>
+</div>

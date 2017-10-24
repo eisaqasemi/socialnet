@@ -1,5 +1,17 @@
 <mat-toolbar color="primary">
     <span>PhotoNet</span>
     <span class="example-spacer"></span>
-    <div mat-card-avatar class="example-header-image"></div>
+    
+    <div style="display:inline-block">
+      <!-- <button mat-icon-button [matMenuTriggerFor]="menu">
+              <mat-icon>more_vert</mat-icon>
+      </button> -->
+      <div mat-card-avatar class="example-header-image" mat-icon-button [matMenuTriggerFor]="menu" ></div>
+      <mat-menu #menu="matMenu" [yPosition]="'below'" [overlapTrigger]="false">
+        <button mat-menu-item (click)="logout()">
+          <mat-icon>exit_to_app</mat-icon>
+          <span>Logout</span>
+        </button>
+      </mat-menu>
+    </div>
   </mat-toolbar>

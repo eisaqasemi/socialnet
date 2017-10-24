@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AlbumApi } from '../../common/sdk/services/custom/Album';
 import { MatDialog } from '@angular/material';
 import { CreateAlbumComponent } from '../create-album/create-album.component'
+import { LoopBackAuth } from "../../common/sdk/services/core/auth.service";
 
 @Component({
   selector: 'app-album-list',
@@ -16,7 +17,8 @@ export class AlbumListComponent implements OnInit {
   order:string = 'DESC';
   constructor(
     private AlbumApi:AlbumApi,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private auth:LoopBackAuth
   ) {
     
    }
@@ -49,9 +51,9 @@ export class AlbumListComponent implements OnInit {
 
   async getAlbums(){
     if(this.sort){
-      this.albums = await this.AlbumApi.find({order:this.sort+' '+this.order}).toPromise();
+      this.albums = await this.AlbumApi.find({where:{socialNetUserId:this.auth.getCurrentUserId()},order:this.sort+' '+this.order}).toPromise();
     }else{
-      this.albums = await this.AlbumApi.find({order:'createdAt DESC'}).toPromise();
+      this.albums = await this.AlbumApi.find({where:{socialNetUserId:this.auth.getCurrentUserId()},order:'createdAt DESC'}).toPromise();
     }
     
   }

@@ -14,6 +14,14 @@
                 <mat-option *ngFor="let album of albums" [value]="album.id">{{album.name}}</mat-option>                  
             </mat-select>
         </mat-form-field>
+
+        <mat-form-field>
+            <mat-select placeholder="Privacy" formControlName="privacy" >
+                <mat-option [value]="0">Public</mat-option> 
+                <mat-option [value]="1">Friends</mat-option>                  
+            </mat-select>
+        </mat-form-field>
+
         <div class="example-full-width">
         <fileupload [url]="'http://localhost:3000/api/uploads/photos/upload'" [file]="form.value.url" (UploadFilesChanges)="form.patchValue({url:$event[0]})" ></fileupload>
         </div>

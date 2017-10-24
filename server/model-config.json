@@ -56,5 +56,17 @@
   "photoTag": {
     "dataSource": "mysql",
     "public": true
+  },
+  "friendship": {
+    "dataSource": "mysql",
+    "public": true
+  },
+  "SocialNetUser": {
+    "dataSource": "mysql",
+    "public": true
+  },
+  "message": {
+    "dataSource": "mysql",
+    "public": true
   }
 }

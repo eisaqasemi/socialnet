@@ -1,0 +1,24 @@
+{
+  "name": "friendship",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {},
+  "validations": [],
+  "relations": {
+    "socialNetUser": {
+      "type": "belongsTo",
+      "model": "SocialNetUser",
+      "foreignKey": ""
+    },
+    "friend": {
+      "type": "belongsTo",
+      "model": "SocialNetUser",
+      "foreignKey": ""
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

@@ -1,0 +1,50 @@
+{
+  "name": "SocialNetUser",
+  "plural": "SocialNetUsers",
+  "base": "User",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "mixins": {
+    "TimeStamp": {
+      "validateUpsert": true,
+      "silenceWarnings": true
+    },
+    "ClearBaseAcls": true
+  },
+  "properties": {
+    "firstName": {
+      "type": "string",
+      "required": true
+    },
+    "lastName": {
+      "type": "string",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {
+    "albums": {
+      "type": "hasMany",
+      "model": "album",
+      "foreignKey": ""
+    },
+    "friends": {
+      "type": "hasMany",
+      "model": "SocialNetUser",
+      "foreignKey": "",
+      "through": "friendship",
+      "keyThrough": "friendId"
+    }
+  },
+  "acls": [
+    {
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "search"
+    }
+  ],
+  "methods": {}
+}

@@ -1,0 +1,52 @@
+
+
+<mat-card class="example-card" style="width:400px;display:block;margin:0 auto;margin-top:10vh;">
+    <mat-card-header>
+      Sing Up
+    </mat-card-header>
+    
+    <mat-card-content style="margin-top:30px">
+        <form class="example-form" *ngIf="valForm" [formGroup]="valForm">
+
+            <div >
+                <mat-form-field >
+                    <input matInput placeholder="First Name" formControlName="firstName" >
+                </mat-form-field>
+            </div>
+
+            <div >
+                <mat-form-field >
+                    <input matInput placeholder="Last Name" formControlName="lastName" >
+                </mat-form-field>
+            </div>
+
+            <div >
+                <mat-form-field >
+                    <input matInput placeholder="email" formControlName="email" >
+                </mat-form-field>
+            </div>
+            
+            <div>
+                <div>
+                    <mat-form-field >
+                        <input matInput placeholder="Password" formControlName="password" >
+                    </mat-form-field>
+                </div>
+    
+                <div>
+                    <mat-form-field >
+                        <input matInput placeholder="Confirm Password" formControlName="confirmPassword" >
+                    </mat-form-field>
+                </div>
+            </div>
+          
+            <div>
+                <button mat-raised-button color="primary" [disabled]="!valForm.valid" (click)="register($event, valForm.value)">Submit</button>
+            </div>
+            <div>
+                <br>
+                <p>Already have an account ? <a [routerLink]="'/login'">Login</a></p>
+            </div>     
+          </form>
+    </mat-card-content>
+  </mat-card>

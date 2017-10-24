@@ -24,6 +24,7 @@
     "@angular/platform-browser-dynamic": "^4.2.4",
     "@angular/router": "^4.2.4",
     "core-js": "^2.4.1",
+    "ng2-validation": "^4.2.0",
     "ngx-chips": "^1.5.3",
     "ngx-uploader": "3.2.3",
     "node-sass": "^4.5.3",

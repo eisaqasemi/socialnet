@@ -4,7 +4,9 @@ import { PhotoApi } from '../common/sdk/services/custom/Photo';
 import { TagApi } from '../common/sdk/services/custom/Tag';
 import { AlbumApi } from '../common/sdk/services/custom/Album';
 import { FormBuilder,FormGroup } from '@angular/forms';
-import { Validators } from '@angular/forms'
+import { Validators } from '@angular/forms';
+import { LoopBackAuth } from "../common/sdk/services/core/auth.service";
+
 @Component({
     selector: 'add-photo',
     templateUrl: 'addPhoto.component.html',
@@ -22,16 +24,18 @@ import { Validators } from '@angular/forms'
       private photoApi:PhotoApi,
       private tagApi:TagApi,
       private formBuilder:FormBuilder,
-      private albumApi:AlbumApi
+      private albumApi:AlbumApi,
+      private auth:LoopBackAuth
     ) { }
   
     async ngOnInit() {
       this.suggestedTags = await this.tagApi.find().toPromise().then(tags=>tags.map(tag=>(tag as any).name))
-      this.albums = await this.albumApi.find().toPromise();
+      this.albums = await this.albumApi.find({where:{socialNetUserId:this.auth.getCurrentUserId()}}).toPromise();
       this.form = this.formBuilder.group({
         title:[this.data.title,[Validators.required]],
         url:[this.data.url,[Validators.required]],
         album:[this.data.album,[Validators.required]],
+        privacy:[this.data.privacy?1:0,[Validators.required]],
         tags:[this.data.tags]
       })
     }

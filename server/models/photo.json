@@ -17,6 +17,9 @@
     },
     "title": {
       "type": "string"
+    },
+    "privacy":{
+      "type":"boolean"
     }
   },
   "validations": [],
@@ -31,6 +34,11 @@
       "model": "tag",
       "foreignKey": "",
       "through": "photoTag"
+    },
+    "owner": {
+      "type": "belongsTo",
+      "model": "SocialNetUser",
+      "foreignKey": ""
     }
   },
   "acls": [],

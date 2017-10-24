@@ -1,0 +1,35 @@
+<mat-grid-list cols="2">
+<mat-grid-tile [colspan]="1"
+[rowspan]="1" >
+  <h3>Friends</h3>
+  <mat-list>
+    <mat-list-item *ngFor="let friend of friends">
+      <img matListAvatar [src]="'/assets/img/profile.jpg'" alt="...">
+      <h3 matLine> {{friend.firstName}} {{friend.lastName}} </h3>
+      <p matLine>
+          <button mat-raised-button color="primary" (click)="unfriend(friend)" >UnFriend</button>
+        <!-- <span> '{{message.subject}}' </span> -->
+        <!-- <span class="demo-2"> -- '{{message.content}}' </span> -->
+      </p>
+    </mat-list-item>
+  </mat-list>
+</mat-grid-tile>
+
+<mat-grid-tile [colspan]="1"
+[rowspan]="1">
+    <mat-form-field >
+        <input matInput placeholder="Search People" (keyup)="search()" [(ngModel)]="query" >
+    </mat-form-field>
+    <mat-list>
+        <mat-list-item *ngFor="let user of users">
+          <img matListAvatar [src]="'/assets/img/profile.jpg'" alt="...">
+          <h3 matLine> {{user.firstName}} {{user.lastName}} </h3>
+          <p matLine>
+            <button mat-raised-button color="primary" (click)="friend(user)" >{{ user.isFriend ? 'UnFriend':'Add Friend'}}</button>
+            <!-- <span> '{{message.subject}}' </span> -->
+            <!-- <span class="demo-2"> -- '{{message.content}}' </span> -->
+          </p>
+        </mat-list-item>
+      </mat-list>
+</mat-grid-tile>
+</mat-grid-list>

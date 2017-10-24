@@ -13,7 +13,7 @@ import { Observable } from 'rxjs/Rx';
 import { Album } from '../../models/Album';
 import { SocketConnection } from '../../sockets/socket.connections';
 import { Photo } from '../../models/Photo';
-import { User } from '../../models/User';
+import { SocialNetUser } from '../../models/SocialNetUser';
 
 
 /**

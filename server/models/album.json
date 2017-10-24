@@ -26,7 +26,7 @@
     },
     "user": {
       "type": "belongsTo",
-      "model": "User",
+      "model": "SocialNetUser",
       "foreignKey": "userId"
     }
   },

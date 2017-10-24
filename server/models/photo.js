@@ -1,11 +1,14 @@
 'use strict';
-const _ = require('lodash')
+const _ = require('lodash');
+const util = require("util");
 module.exports = function(Photo) {
     Photo.disableRemoteMethodByName('create');
-    Photo.addPhoto= function(data,cb){
-        const {title,url,album} = data;
+    Photo.addPhoto= function(data,options,cb){
+        const token = options && options.accessToken;
+        const userId = token && token.userId;
+        const {title,url,album,privacy} = data;
         const tags = data.tags || []
-        Photo.create({url,title,albumId:album}).        
+        Photo.create({url,title,albumId:album,privacy,ownerId:userId}).        
         then(photo=>{
             let TagCreationPromises = tags.map(tag=>{
                 return Photo.app.models.tag.upsertWithWhere({name:tag},{name:tag});
@@ -27,7 +30,8 @@ module.exports = function(Photo) {
 
     Photo.remoteMethod('addPhoto',{
         accepts:[
-            {arg: 'data', type:'object', http:{ source:'body'}}
+            {arg: 'data', type:'object', http:{ source:'body'}},
+            { arg: "options", type: "object", http: "optionsFromRequest" }
           ],
         http:{verb: 'post',path:'/'},
         returns:{type:"object",root:true},
@@ -37,8 +41,8 @@ module.exports = function(Photo) {
     Photo.disableRemoteMethodByName('updateAttributes');
     Photo.editPhoto= function(id,data,cb){
         let self = this;
-        const {title,url,tags,album} = data;
-        Photo.update({id},{url,title,albumId:album}).        
+        const {title,url,tags,album,privacy} = data;
+        Photo.update({id},{url,title,albumId:album,privacy}).        
         then(()=>{
             
             let TagCreationPromises = tags.map(tag=>{
@@ -85,27 +89,46 @@ module.exports = function(Photo) {
         let app = Photo.app;
         let photos;
         let albumIds = await app.models.album.
-            find({where:{userId}}).
+            find({where:{socialNetUserId:userId}}).
             then(albums=>albums.map(album=>album.id))
-        
+        let user = await app.models.SocialNetUser.findById(userId);
+        let friends = await util.promisify(user.friends)()
+        let friendIds = friends.map(friend=>friend.id);
+
         if(sort){
             let sortBy;
             switch(sort){
                 case 'title':
                 case 'createdAt':
-                    photos = await app.models.Photo.find({where:{albumId:{inq:albumIds}},order:sort+' '+order,include:['tags','album']});
+                    photos = await app.models.Photo.find({where:{or:[
+                        {albumId:{inq:albumIds}},
+                        {privacy:"0"},
+                        {ownerId:{inq:friendIds}}
+                    ]},order:sort+' '+order,include:['tags','album','owner']});
                     break;
                 case 'tags':
                     let photosIds = await app.models.Photo
-                        .find({where:{albumId:{inq:albumIds}}})
+                        .find({where:{or:[
+                            {albumId:{inq:albumIds}},
+                            {privacy:"0"},
+                            {ownerId:{inq:friendIds}}
+                        ]}})
                         .then(photos=>photos.map(photo=>photo.id))
-                    photos = await app.models.tag.find({where:{photoId:{inq:photosIds}},order:'name '+order,include:{photos:['tags','album']}})
+                    photos = await app.models.tag.find({where:{photoId:{inq:photosIds}},order:'name '+order,include:{photos:['tags','album','owner']}})
                     break;
                 default:
-                    photos = await app.models.Photo.find({where:{albumId:{inq:albumIds}},include:['tags','album']});
+                    photos = await app.models.Photo.find({where:{or:[
+                        {albumId:{inq:albumIds}},
+                        {privacy:"0"},
+                        {ownerId:{inq:friendIds}}
+                    ]},include:['tags','album','owner']});
             }
         }else{
-            photos = await app.models.Photo.find({where:{albumId:{inq:albumIds}},include:['tags','album']});
+            photos = await app.models.Photo.find({where:{or:[
+                {albumId:{inq:albumIds}},
+                {privacy:"0"},
+                {ownerId:{inq:friendIds}}
+            ]},include:['tags','album','owner']});
         }
         cb(null,photos);
     }
