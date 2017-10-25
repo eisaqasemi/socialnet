@@ -4,6 +4,8 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { FormBuilder,FormGroup } from '@angular/forms';
 import { Validators } from '@angular/forms';
 import { AlbumApi } from '../../common/sdk/services/custom/Album';
+import { SocialNetUserApi } from '../../common/sdk/services/custom/SocialNetUser';
+import { LoopBackAuth } from '../../common/sdk/services/core/auth.service';
 @Component({
   selector: 'app-create-album',
   templateUrl: './create-album.component.html',
@@ -16,7 +18,9 @@ export class CreateAlbumComponent implements OnInit {
     public dialogRef: MatDialogRef<CreateAlbumComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private formBuilder:FormBuilder,
-    private albumApi:AlbumApi
+    private albumApi:AlbumApi,
+    private userApi:SocialNetUserApi,
+    private auth:LoopBackAuth
   ) { 
     this.form = this.formBuilder.group({
       name:[this.data.name,[Validators.required]]
@@ -38,7 +42,8 @@ export class CreateAlbumComponent implements OnInit {
         this.dialogRef.close();
       }) 
     }else{
-      this.albumApi.create(form).
+
+      this.userApi.createAlbums(this.auth.getCurrentUserId(),form).
       subscribe(value=>{
         this.dialogRef.close();
       }) 

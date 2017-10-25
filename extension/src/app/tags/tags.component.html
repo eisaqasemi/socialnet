@@ -1,0 +1,9 @@
+<div *ngIf="tag">
+  <p style="margin-left: 100px;">
+    Photos with tag '{{tag.name}}'
+  </p>
+  
+  <div *ngIf="tag.photos">
+    <app-photo *ngFor="let photo of tag.photos" [photo]="photo" (refresh)="getPhotos()" ></app-photo>
+  </div>
+</div>

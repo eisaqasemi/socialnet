@@ -54,6 +54,9 @@ import { TagApi } from './services/custom/Tag';
 import { AlbumApi } from './services/custom/Album';
 import { UploadApi } from './services/custom/Upload';
 import { PhotoTagApi } from './services/custom/PhotoTag';
+import { FriendshipApi } from './services/custom/Friendship';
+import { SocialNetUserApi } from './services/custom/SocialNetUser';
+import { MessageApi } from './services/custom/Message';
 /**
 * @module SDKBrowserModule
 * @description
@@ -91,6 +94,9 @@ export class SDKBrowserModule {
         AlbumApi,
         UploadApi,
         PhotoTagApi,
+        FriendshipApi,
+        SocialNetUserApi,
+        MessageApi,
         internalStorageProvider,
         { provide: SDKStorage, useClass: StorageBrowser },
         { provide: SocketDriver, useClass: SocketBrowser }

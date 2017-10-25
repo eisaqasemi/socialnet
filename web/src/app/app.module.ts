@@ -13,7 +13,7 @@ import { AddPhotoComponent } from './addPhoto/addPhoto.component';
 import { TagInputModule,TagInputComponent } from 'ngx-chips';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FileUpload } from './fileupload/fileupload';
-import { NgFileSelectDirective } from 'ngx-uploader';
+import { NgUploaderModule } from 'ngx-uploader';
 import { PhotosComponent } from './Photos/Photos.component';
 import { AlbumsComponent } from './Albums/Albums.component';
 import { AlbumComponent } from './Albums/album/album.component';
@@ -56,7 +56,6 @@ const routes: Routes = [
     AppComponent,
     AddPhotoComponent,
     FileUpload,
-    NgFileSelectDirective,
     PhotosComponent,
     AlbumsComponent,
     AlbumComponent,
@@ -95,7 +94,8 @@ const routes: Routes = [
     MatSidenavModule,
     MatListModule,
     MatMenuModule,
-    MatGridListModule
+    MatGridListModule,
+    NgUploaderModule
   ],
   providers: [
     AuthenticationGuardService,

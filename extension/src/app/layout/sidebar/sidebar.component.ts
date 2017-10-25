@@ -18,17 +18,12 @@ export class SidebarComponent implements OnInit {
       icon:"photo_album"
     },
     {
-      name: 'Tags',
-      link:"/tags",
-      icon:"label_outline"
-    },
-    {
       name:"Friends",
-      link:"friends",
+      link:"/friends",
       icon:"group"
     },{
       name:"Messages",
-      link:"messages",
+      link:"/messages",
       icon:"message"
     }
   ];

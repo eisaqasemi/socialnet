@@ -1,0 +1,8 @@
+<mat-list>
+    <mat-list-item *ngFor="let friend of friends">
+      <img matListAvatar [src]="'/assets/img/profile.jpg'" alt="...">
+      <h3 matLine> {{friend.firstName}} {{friend.lastName}} </h3>
+      <p matLine>
+          <button mat-raised-button color="primary" (click)="direct(friend)" >Direct</button>
+      </p>
+    </mat-list-item>

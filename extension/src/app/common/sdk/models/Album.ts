@@ -1,28 +1,30 @@
 /* tslint:disable */
 import {
   Photo,
-  User
+  SocialNetUser
 } from '../index';
 
 declare var Object: any;
 export interface AlbumInterface {
   "name": string;
   "id"?: number;
-  "userId"?: number;
   "createdAt": Date;
   "updatedAt": Date;
+  "socialNetUserId"?: number;
+  "userId"?: number;
   photos?: Photo[];
-  user?: User;
+  user?: SocialNetUser;
 }
 
 export class Album implements AlbumInterface {
   "name": string;
   "id": number;
-  "userId": number;
   "createdAt": Date;
   "updatedAt": Date;
+  "socialNetUserId": number;
+  "userId": number;
   photos: Photo[];
-  user: User;
+  user: SocialNetUser;
   constructor(data?: AlbumInterface) {
     Object.assign(this, data);
   }
@@ -62,10 +64,6 @@ export class Album implements AlbumInterface {
           name: 'id',
           type: 'number'
         },
-        "userId": {
-          name: 'userId',
-          type: 'number'
-        },
         "createdAt": {
           name: 'createdAt',
           type: 'Date'
@@ -73,6 +71,14 @@ export class Album implements AlbumInterface {
         "updatedAt": {
           name: 'updatedAt',
           type: 'Date'
+        },
+        "socialNetUserId": {
+          name: 'socialNetUserId',
+          type: 'number'
+        },
+        "userId": {
+          name: 'userId',
+          type: 'number'
         },
       },
       relations: {
@@ -83,8 +89,8 @@ export class Album implements AlbumInterface {
         },
         user: {
           name: 'user',
-          type: 'User',
-          model: 'User'
+          type: 'SocialNetUser',
+          model: 'SocialNetUser'
         },
       }
     }

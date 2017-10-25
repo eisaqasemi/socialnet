@@ -1,0 +1,1 @@
+{"version":3,"sources":["socket.browser.ts"],"names":[],"mappings":"AAAA,oBAAoB;AACpB,OAAO,KAAK,EAAE,MAAM,kBAAkB,CAAC;AACvC;;;;;;;;GAQG;AACH;IAAA;IAYA,CAAC;IAXC;;;;;;;QAOI;IACJ,+BAAO,GAAP,UAAQ,GAAW,EAAE,OAAY;QAC/B,MAAM,CAAC,EAAE,CAAC,GAAG,EAAE,OAAO,CAAC,CAAC;IAC1B,CAAC;IACH,oBAAC;AAAD,CAZA,AAYC,IAAA","file":"socket.browser.js","sourceRoot":""}

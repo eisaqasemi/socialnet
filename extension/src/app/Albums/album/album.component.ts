@@ -28,11 +28,12 @@ export class AlbumComponent implements OnInit {
 
   async getPhotos(){
     this.album = await this.AlbumApi.findById(this.albumId,
-      {include:
+      {
+        include:
         {
         relation:'photos',
         scope:{
-          include:['tags','album'],
+          include:['tags','album','owner'],
           order:"createdAt DESC"
         }
         }

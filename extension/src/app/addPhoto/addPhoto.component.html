@@ -14,6 +14,14 @@
                 <mat-option *ngFor="let album of albums" [value]="album.id">{{album.name}}</mat-option>                  
             </mat-select>
         </mat-form-field>
+
+        <mat-form-field>
+            <mat-select placeholder="Privacy" formControlName="privacy" >
+                <mat-option [value]="0">Public</mat-option> 
+                <mat-option [value]="1">Friends</mat-option>                  
+            </mat-select>
+        </mat-form-field>
+
         <div class="example-full-width">
         <fileupload [url]="'http://localhost:3000/api/uploads/photos/upload'" [file]="form.value.url" (UploadFilesChanges)="form.patchValue({url:$event[0]})" ></fileupload>
         </div>
@@ -21,18 +29,5 @@
             <button mat-raised-button color="primary" [disabled]="!form.valid" (click)="submit(form.value)">Submit</button>
          </div>     
 </form>
-<div *ngIf="finish">
-    <div class="f-modal-alert">
-            <div class="f-modal-icon f-modal-success animate">
-                <span class="f-modal-line f-modal-tip animateSuccessTip"></span>
-                <span class="f-modal-line f-modal-long animateSuccessLong"></span>
-                <div class="f-modal-placeholder"></div>
-                <div class="f-modal-fix"></div>
-            </div>
-            <p style="text-align: center;
-            margin-top: 40px;">Photo Added</p>
-    </div>
-</div>
-
 
 

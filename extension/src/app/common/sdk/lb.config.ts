@@ -70,5 +70,3 @@ export class LoopBackConfig {
     return (LoopBackConfig.filterOn === 'headers');
   }
 }
-
-

@@ -6,6 +6,9 @@ import { Tag } from '../../models/Tag';
 import { Album } from '../../models/Album';
 import { Upload } from '../../models/Upload';
 import { PhotoTag } from '../../models/PhotoTag';
+import { Friendship } from '../../models/Friendship';
+import { SocialNetUser } from '../../models/SocialNetUser';
+import { Message } from '../../models/Message';
 
 export interface Models { [name: string]: any }
 
@@ -19,6 +22,9 @@ export class SDKModels {
     Album: Album,
     Upload: Upload,
     PhotoTag: PhotoTag,
+    Friendship: Friendship,
+    SocialNetUser: SocialNetUser,
+    Message: Message,
     
   };
 

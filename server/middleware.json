@@ -40,9 +40,15 @@
       ]
     }
   },
-  "files": {},
+  "files": {
+    "connect-gzip-static": {
+      "params": "$!../web/dist"
+    }
+  },
   "final": {
-    "loopback#urlNotFound": {}
+    "./utils/final": {
+      "params": "$!../web/dist"
+    }
   },
   "final:after": {
     "strong-error-handler": {}
