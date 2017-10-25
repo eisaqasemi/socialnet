@@ -4,8 +4,17 @@ var async = require('async');
 //var lbTables = ['User', 'AccessToken', 'ACL', 'RoleMapping', 'Role'];
 var tables = 
 [
-
-"photo"
+  'ACL',
+  'AccessToken',
+  "RoleMapping",
+  "Role",
+  "photo",
+  "tag",
+  "album",
+  "photoTag",
+  'message',
+  'SocialNetUser',
+  'friendship'
 ]
 
 async.eachSeries(tables, 
@@ -13,7 +22,7 @@ async.eachSeries(tables,
 
     setTimeout(()=>{
 
-      ds.autoupdate([table],function(er) {
+      ds.automigrate([table],function(er) {
         if (er) {
           callback(er)
           throw er;
